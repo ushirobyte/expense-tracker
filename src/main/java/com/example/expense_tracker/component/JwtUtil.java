@@ -5,7 +5,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +16,10 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    @Value("${app.security.jwt.secret}") private String secret;
-    @Value("${app.security.jwt.ttl-min}") private Long ttlMin;
+    @Value("${app.security.jwt.secret}")
+    private String secret;
+    @Value("${app.security.jwt.ttl-min}")
+    private Long ttlMin;
 
     public String generateToken(String subject, Collection<? extends GrantedAuthority> roles) {
         Date now = new Date();
@@ -26,7 +28,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .claim("roles", roles.stream().map(GrantedAuthority::getAuthority).toList())
                 .setIssuedAt(now).setExpiration(exp)
-                .signWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)), SignatureAlgorithm.HS256)
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)), SignatureAlgorithm.HS512)
                 .compact();
     }
 
