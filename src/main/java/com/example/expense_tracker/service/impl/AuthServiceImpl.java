@@ -33,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(registerRequest.getEmail());
         user.setFullName(registerRequest.getFullName());
         user.setBaseCurrency(registerRequest.getBaseCurrency());
+        user.setPasswordHash(passwordEncoder.encode(registerRequest.getPassword()));
 
         var role = entityManager.createQuery("SELECT r FROM Role r WHERE r.name = :n", Role.class)
                 .setParameter("n", "ROLE_USER").getSingleResult();

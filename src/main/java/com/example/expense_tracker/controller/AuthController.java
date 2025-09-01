@@ -8,7 +8,6 @@ import com.example.expense_tracker.model.dto.TokenResponse;
 import com.example.expense_tracker.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

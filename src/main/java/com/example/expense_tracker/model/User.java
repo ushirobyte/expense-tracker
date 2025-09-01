@@ -10,8 +10,12 @@ import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity @Table(name = "users")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User extends BaseEntity {
 
     @Column(name = "email", nullable = false, unique = true)
@@ -26,7 +30,7 @@ public class User extends BaseEntity {
     @Column(name = "base_currency")
     private String baseCurrency = "KZT";
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
     @ManyToMany(fetch = FetchType.EAGER)
